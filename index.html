@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Colony Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #resources {
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Space Colony Builder</h1>
+    <div id="resources">
+        <p>Resources:</p>
+        <p id="metal">Metal: 500</p>
+        <p id="energy">Energy: 200</p>
+        <p id="population">Population: 5</p>
+        <p id="terraforming">Terraforming Level: 0%</p>
+    </div>
+    <div id="buildings">
+        <h2>Buildings:</h2>
+        <button onclick="buildBuilding('solarPanel')">Build Solar Panel (Cost: 50 Metal)</button>
+        <button onclick="buildBuilding('habitat')">Build Habitat (Cost: 100 Metal, 50 Energy)</button>
+        <button onclick="buildBuilding('metalMine')">Build Metal Mine (Cost: 150 Metal)</button>
+        <button onclick="buildBuilding('researchLab')">Build Research Lab (Cost: 200 Metal, 100 Energy)</button>
+        <button onclick="buildBuilding('terraformer')">Build Terraformer (Cost: 500 Metal, 200 Energy)</button>
+    </div>
+    <div id="upgrades">
+        <h2>Upgrades:</h2>
+        <button onclick="buyUpgrade('metalProduction')">Increase Metal Production (Cost: 100 Metal)</button>
+        <button onclick="buyUpgrade('energyProduction')">Increase Energy Production (Cost: 100 Metal)</button>
+        <button onclick="buyUpgrade('populationGrowth')">Increase Population Growth (Cost: 200 Metal)</button>
+        <button onclick="buyUpgrade('terraformingSpeed')">Increase Terraforming Speed (Cost: 500 Metal)</button>
+        <button onclick="buyUpgrade('habitatEfficiency')">Improve Habitat Efficiency (Cost: 300 Metal)</button>
+        <button onclick="buyUpgrade('researchEfficiency')">Improve Research Efficiency (Cost: 400 Metal)</button>
+    </div>
+    <div id="events">
+        <h2>Events:</h2>
+        <button onclick="triggerEvent('alienAttack')">Alien Attack!</button>
+        <button onclick="triggerEvent('rescueShip')">Rescue Ship Arrives (Cost: 500 Metal, 200 Energy)</button>
+        <button onclick="triggerEvent('terraformingEvent')">Terraforming Breakthrough!</button>
+    </div>
+
+    <script>
+        let metal = 500;
+        let energy = 200;
+        let population = 5;
+        let terraforming = 0;
+        let metalProduction = 0;
+        let energyProduction = 0;
+        let populationGrowth = 0;
+        let terraformingSpeed = 1;
+        let habitatEfficiency = 1;
+        let researchEfficiency = 1;
+
+        function gatherMetal() {
+            metal += 10;
+            updateResources();
+        }
+
+        function buildBuilding(type) {
+            switch (type) {
+                case 'solarPanel':
+                    if (metal >= 50) {
+                        metal -= 50;
+                        energyProduction += 20;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'habitat':
+                    if (metal >= 100 && energy >= 50) {
+                        metal -= 100;
+                        energy -= 50;
+                        population += 10;
+                        updateResources();
+                    } else {
+                        alert("Not enough resources!");
+                    }
+                    break;
+                case 'metalMine':
+                    if (metal >= 150) {
+                        metal -= 150;
+                        metalProduction += 10;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'researchLab':
+                    if (metal >= 200 && energy >= 100) {
+                        metal -= 200;
+                        energy -= 100;
+                        researchEfficiency += 1;
+                        updateResources();
+                    } else {
+                        alert("Not enough resources!");
+                    }
+                    break;
+                case 'terraformer':
+                    if (metal >= 500 && energy >= 200) {
+                        metal -= 500;
+                        energy -= 200;
+                        terraformingSpeed += 1;
+                        updateResources();
+                    } else {
+                        alert("Not enough resources!");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function buyUpgrade(type) {
+            switch (type) {
+                case 'metalProduction':
+                    if (metal >= 100) {
+                        metal -= 100;
+                        metalProduction += 5;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'energyProduction':
+                    if (metal >= 100) {
+                        metal -= 100;
+                        energyProduction += 10;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'populationGrowth':
+                    if (metal >= 200) {
+                        metal -= 200;
+                        populationGrowth += 1;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'terraformingSpeed':
+                    if (metal >= 500) {
+                        metal -= 500;
+                        terraformingSpeed += 1;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'habitatEfficiency':
+                    if (metal >= 300) {
+                        metal -= 300;
+                        habitatEfficiency += 0.1;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                case 'researchEfficiency':
+                    if (metal >= 400) {
+                        metal -= 400;
+                        researchEfficiency += 0.1;
+                        updateResources();
+                    } else {
+                        alert("Not enough metal!");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function triggerEvent(event) {
+            switch (event) {
+                case 'alienAttack':
+                    // Reduce population by 10% if population > 0
+                    if (population > 0) {
+                        population = Math.ceil(population * 0.9);
+                        updateResources();
+                        alert("Aliens attacked! Population decreased!");
+                    }
+                    break;
+                case 'rescueShip':
+                    if (metal >= 500 && energy >= 200) {
+                        metal -= 500;
+                        energy -= 200;
+                        population += 50;
+                        updateResources();
+                        alert("Rescue ship arrived! Population increased!");
+                    } else {
+                        alert("Not enough resources!");
+                    }
+                    break;
+                case 'terraformingEvent':
+                    terraforming += 10;
+                    updateResources();
+                    alert("Terraforming breakthrough! Terraforming level increased!");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function updateResources() {
+            document.getElementById("metal").innerText = "Metal: " + metal;
+            document.getElementById("energy").innerText = "Energy: " + energy;
+            document.getElementById("population").innerText = "Population: " + population;
+            document.getElementById("terraforming").innerText = "Terraforming Level: " + terraforming + "%";
+        }
+    </script>
+</body>
+</html>
