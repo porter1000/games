@@ -1,0 +1,23 @@
+.sidebar {
+    background-color: rgba(126, 126, 126, 0.5);
+    color: #ecf0f1;
+    padding: 20px;
+    border-top: 1px solid #2c3e50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    color: #ecf0f1;
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    color: rgb(255, 255, 255);
+  }
+  
+  .sidebar p {
+    margin: 5px 0;
+    color: rgb(255, 255, 255);
+  }
+  

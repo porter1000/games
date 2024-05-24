@@ -1,0 +1,43 @@
+/* Settings.css */
+
+/* Mobile optimization */
+@media (max-width: 600px) {
+    .settings-container {
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  
+    .back-button {
+      width: 100%;
+    }
+  }
+  
+  /* Centering content */
+  .settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full height of the viewport */
+  }
+  
+  .settings-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .back-button {
+    margin-top: 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333; /* Darker button color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: fit-content;
+  }
+  
+  .back-button:hover {
+    background-color: #444; /* Darker hover color */
+  }
+  
